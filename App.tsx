@@ -1,39 +1,59 @@
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { Image } from 'react-native'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 
-function App(): React.JSX.Element {
+import Guardados from './views/Guardados';
+import Inicio from './views/Inicio';
+
+//Defieniendo la navegacion
+const Tab = createMaterialBottomTabNavigator()
+
+const App = () => {
 
   return (
-    <Text>Hola que hace</Text>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name='Inicio'
+          component={Inicio}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused ? 
+                    require('./src/img/homeNegro.png') :
+                    require('./src/img/home.png') 
+                }
+                style={{
+                  height: 22, width: 22
+                }}
+              />
+            )
+          }}
+        />
+
+        <Tab.Screen
+          name='Guardados'
+          component={Guardados}
+          options={{
+            tabBarIcon: ({focused}) => (
+              <Image
+                source={
+                  focused ? 
+                    require('./src/img/guardarNegro.png') :
+                    require('./src/img/guardar.png') 
+                }
+                style={{
+                  height: 22, width: 22
+                }}
+              />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
