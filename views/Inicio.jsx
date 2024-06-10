@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Keyboard } from 'react-native'
-import { Text, TextInput, HelperText, Button } from 'react-native-paper'
-import { Picker } from '@react-native-picker/picker'
+
+//Importando componentes
+import Formulario from '../components/Formulario'
 
 const Inicio = () => {
 
   //Defiendo el estado para la barra de busqueda
-  const [texto, setTexto] = useState('')
-
-  const onChangeText = (texto) => setTexto(texto)
-
-  const errorNum = () => {
-    return texto.includes('1')
-  }
+  const [busqueda, setBusqueda] = useState({
+    ciudad: '',
+    pais: ''
+  })
 
   const ocultarTeclado = () => {
     Keyboard.dismiss()
@@ -20,21 +18,10 @@ const Inicio = () => {
 
   return (
     <View style={styles.contenedorPrincipal}>
-      <Text style={styles.titulo}>Aqui va la Ciudad</Text>
-      <View style={styles.contenido}>
-        
-        <TextInput
-          label='Ciudad o País'
-          mode='outlined'
-          value={texto}
-          onChangeText={onChangeText}
-          onBlur={() => ocultarTeclado()}
-        />
-        <HelperText type='error' visible={errorNum()}>
-          La cuidad no puede contener números
-        </HelperText>
-        <Button mode='elevated' style={styles.btnBuscar} onPress={() => {onChangeText}}>Buscar Clima</Button>
-      </View>
+      <Formulario
+        busqueda={busqueda}
+        setBusqueda={setBusqueda}
+      />
     </View>
   )
 }
