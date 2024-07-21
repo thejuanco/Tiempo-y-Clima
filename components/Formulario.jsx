@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {Text, TextInput, Button, Dialog, Portal} from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 
-const Formulario = ({busqueda, setBusqueda}) => {
+const Formulario = ({busqueda, setBusqueda, setConsultar}) => {
   //Extraer los datos de la busqueda
   const {ciudad, pais} = busqueda;
 
@@ -17,7 +17,7 @@ const Formulario = ({busqueda, setBusqueda}) => {
         setAlerta(true)
         return;
     }
-    setBusqueda({ciudad, pais});
+    setConsultar(true)
   };
 
   return (

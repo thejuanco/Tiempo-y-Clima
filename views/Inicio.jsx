@@ -12,6 +12,13 @@ const Inicio = () => {
     pais: ''
   })
 
+  //Consultar la URL de la API
+  const [consultar, setConsultar] = useState(false)
+  const [resultado, setResultado] = useState({})
+
+  //Extrayendo la ciudad y pais del state
+  const {ciudad , pais } = busqueda
+
   const ocultarTeclado = () => {
     Keyboard.dismiss()
   }
@@ -21,6 +28,7 @@ const Inicio = () => {
       <Formulario
         busqueda={busqueda}
         setBusqueda={setBusqueda}
+        setConsultar={setConsultar}
       />
     </View>
   )
