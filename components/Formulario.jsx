@@ -1,24 +1,21 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Text, TextInput, Button, Snackbar} from 'react-native-paper';
+import {Text, TextInput, Button, Dialog, Portal} from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 
 const Formulario = ({busqueda, setBusqueda}) => {
   //Extraer los datos de la busqueda
   const {ciudad, pais} = busqueda;
 
-  const [visible, setVisible] = useState(false);
-
-  //SnackBar
-  const onToggleSnackBar = () => setVisible(!visible);
-  const onDismissSnackBar = () => setVisible(false);
+  //Mostrar el Dialog
+  const [alerta, setAlerta] = useState(false)
 
   //Validacion
   const consultarClima = () => {
     if (ciudad.trim() === '') {
-        console.log('Estan vacios los campos de la busqueda');
-      
-      return;
+        //console.log('Estan vacios los campos de la busqueda');
+        setAlerta(true)
+        return;
     }
     setBusqueda({ciudad, pais});
   };
@@ -26,7 +23,6 @@ const Formulario = ({busqueda, setBusqueda}) => {
   return (
     <View>
       <View>
-      
         <TextInput
           label="Ciudad"
           mode="outlined"
@@ -51,14 +47,26 @@ const Formulario = ({busqueda, setBusqueda}) => {
         <Button
           mode="elevated"
           onPress={() => {
-            consultarClima(), onToggleSnackBar(true)
+            consultarClima()
           }}>
           Buscar Clima
         </Button>
       </View>
-      <Snackbar visible={visible} onDismiss={onDismissSnackBar}>
-        Ingresa un ciudad o Pais
-      </Snackbar>
+
+      <Portal>
+        <Dialog
+          visible={alerta}
+          onDismiss={() => setAlerta(false)}
+        >
+        <Dialog.Title>Error</Dialog.Title>
+        <Dialog.Content>
+          <Text variant='bodyMedium'>Todos los campos son obligatorios</Text>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={() => setAlerta(false)}>Cerrar</Button>
+        </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </View>
     
   );
