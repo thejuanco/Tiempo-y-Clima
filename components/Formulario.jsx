@@ -12,7 +12,7 @@ const Formulario = ({busqueda, setBusqueda}) => {
 
   //Validacion
   const consultarClima = () => {
-    if (ciudad.trim() === '') {
+    if (ciudad.trim() === '' || pais.trim() === '') {
         //console.log('Estan vacios los campos de la busqueda');
         setAlerta(true)
         return;
@@ -27,12 +27,13 @@ const Formulario = ({busqueda, setBusqueda}) => {
           label="Ciudad"
           mode="outlined"
           value={ciudad}
+          onChangeText={ciudad => setBusqueda({...busqueda, ciudad})}
         />
         <Picker
         //Añadir estilos al formulario
         // style={{ height: 120, backgroundColor: 'white', borderRadius: 15,}}
         selectedValue={pais}
-        // onValueChange={ pais => setBusqueda({...busqueda, pais})}
+        onValueChange={ pais => setBusqueda({...busqueda, pais})}
         >
           <Picker.Item label="-- Seleccione un país --" value="" />
           <Picker.Item label="Mexico" value="MX" />
