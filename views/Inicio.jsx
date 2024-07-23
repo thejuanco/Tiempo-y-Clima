@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Keyboard } from 'react-native'
-import { Dialog, Portal, Text } from 'react-native-paper'
+import { Dialog, Portal, Text, Button } from 'react-native-paper'
 
 //Importando componentes
 import Formulario from '../components/Formulario'
@@ -16,6 +16,7 @@ const Inicio = () => {
   //consultar la URL de la API
   const [consultar, setConsultar] = useState(false)
   const [resultado, setResultado] = useState({})
+  const [alerta, setAlerta] = useState(false)
 
   //Extrayendo la ciudad y pais del state
   const { ciudad, pais } = busqueda
@@ -38,14 +39,9 @@ const Inicio = () => {
           setResultado(resultado)
           setConsultar(false)
 
-          //Modifica los colores de fondo basado en la temperatura
-          const kelvin = 273.15
-          const { main } = resultado
-          const actual = main.temp - kelvin
-
           //Si el pais no existe muesta una alerta 
-          if (respuesta.status === 404) {
-            console.log('No existe el pais')
+          if (respuesta.status === 404){
+            setAlerta(true)
             return;
           }
 
@@ -64,16 +60,32 @@ const Inicio = () => {
   }
 
   return (
-    <View style={styles.contenedorPrincipal}>
-      <Clima
-        resultado={resultado}
-      />
-      <Formulario
-        busqueda={busqueda}
-        setBusqueda={setBusqueda}
-        setConsultar={setConsultar}
-      />
-    </View>
+    <>
+      <View style={styles.contenedorPrincipal}>
+        <Clima
+          resultado={resultado}
+        />
+        <Formulario
+          busqueda={busqueda}
+          setBusqueda={setBusqueda}
+          setConsultar={setConsultar}
+        />
+      </View>
+      <Portal>
+        <Dialog
+          visible={alerta}
+          onDismiss={() => setAlerta(false)}
+        >
+          <Dialog.Title>Error</Dialog.Title>
+          <Dialog.Content>
+            <Text variant='bodyMedium'>No se encontró el pais o ciudad</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setAlerta(false)}>Cerrar</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    </>
   )
 }
 
