@@ -4,12 +4,12 @@ import {Text} from 'react-native-paper';
 
 const Clima = ({resultado}) => {
   const {name, main} = resultado;
-
+  
   //Si no hay resultado, no mostrar nada
-  if (!name) return null;
+  if (!name) return null
 
   //Grados kelvin
-  const kelvin = 273.15;
+  const kelvin = 273.15
 
   return (
     <View>

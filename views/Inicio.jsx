@@ -8,23 +8,24 @@ import Clima from '../components/Clima'
 
 const Inicio = () => {
 
-  //Defiendo el estado para la barra de busqueda
   const [busqueda, setBusqueda] = useState({
     ciudad: '',
     pais: ''
   })
 
-  //Consultar la URL de la API
+  //consultar la URL de la API
   const [consultar, setConsultar] = useState(false)
   const [resultado, setResultado] = useState({})
 
   //Extrayendo la ciudad y pais del state
-  const {ciudad , pais } = busqueda
+  const { ciudad, pais } = busqueda
 
   //Consultando la API
   useEffect(() => {
+
     const consultarClima = async () => {
-      if(consultar) {
+
+      if (consultar) {
         //El API Key de la api
         const appId = '8302505d9facb1f23ef6ea0f15b5b6bb'
         //le pasamos el pais, ciudad y la api key
@@ -32,22 +33,23 @@ const Inicio = () => {
 
         try {
           const respuesta = await fetch(url)
-          const resultado = respuesta.json()
-          //Reiniciamos el state para futuras consultas
+          const resultado = await respuesta.json()
+          console.log(url)
+          //reiniciamos el state para futuras consultas
           setResultado(resultado)
           setConsultar(false)
 
           //Modifica los colores de fondo basado en la temperatura
           const kelvin = 273.15
           const { main } = resultado
-          //const actual = main.temp - kelvin
+          const actual = main.temp - kelvin
 
-          //Si el pais no existe muestra una alerta
-          if(respuesta.status === 404){
-            console.log("No existe el pais")
-            return
+          //Si el pais no existe muesta una alerta 
+          if (respuesta.status === 404) {
+            console.log('No existe el pais')
+            return;
           }
-          console.log(url)
+
         } catch (error) {
           console.log(error)
         }
@@ -56,6 +58,7 @@ const Inicio = () => {
 
     consultarClima()
   }, [consultar])
+
 
   const ocultarTeclado = () => {
     Keyboard.dismiss()
