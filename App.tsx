@@ -36,7 +36,7 @@ const App = () => {
           />
 
           <Tab.Screen
-            name='Guardados'
+            name='Favoritos'
             component={Guardados}
             options={{
               tabBarIcon: ({focused}) => (
