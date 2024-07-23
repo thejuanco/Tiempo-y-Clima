@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {Text, TextInput, Button, Dialog, Portal} from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker';
 
@@ -49,7 +49,14 @@ const Formulario = ({busqueda, setBusqueda, setConsultar}) => {
           mode="elevated"
           onPress={() => {
             consultarClima()
-          }}>
+          }}
+          icon={({size, color}) => (
+            <Image
+              source={require('../src/img/busqueda.png')}
+              style={{width: size, height: size, tintColor: color}}
+            />
+          )}
+          >
           Buscar Clima
         </Button>
       </View>
