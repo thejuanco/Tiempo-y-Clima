@@ -34,7 +34,6 @@ const Inicio = () => {
         try {
           const respuesta = await fetch(url)
           const resultado = await respuesta.json()
-          console.log(url)
           //reiniciamos el state para futuras consultas
           setResultado(resultado)
           setConsultar(false)

@@ -1,22 +1,89 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {View, StyleSheet, Image} from 'react-native';
+import {Text, Card, Button} from 'react-native-paper';
 
 const Clima = ({resultado}) => {
-  const {name, main} = resultado;
-  
+  const {name, main, weather, sys} = resultado;
+
   //Si no hay resultado, no mostrar nada
-  if (!name) return null
+  if (!name) return null;
 
   //Grados kelvin
-  const kelvin = 273.15
+  const kelvin = 273.15;
+
+  //Recorrer el weather
+  const descriptions = weather.map(element => element.description);
+  const contry = sys.country;
 
   return (
-    <View>
-      <Text>Clima en tu ciudad</Text>
-      <Text>{parseInt(main.temp - kelvin)} </Text>
+    <View style={styles.content}>
+      <Card>
+        <Card.Content>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+            <Text style={styles.number}>{parseInt(main.temp - kelvin)}° </Text>
+
+            <View style={styles.containerDesc}>
+              <Text style={styles.titleWeather}>{descriptions}</Text>
+              <Text style={styles.titleDescription}>
+                {name}, {contry}
+              </Text>
+            </View>
+
+            <Image
+              source={require('../src/img/nube-sol.png')}
+              style={styles.mainImage}
+            />
+          </View>
+          <Button
+            icon={({size, color}) => (
+              <Image
+                source={require('../src/img/corazon.png')}
+                style={{width: size, height: size, tintColor: color}}
+              />
+            )}
+            mode="contained-tonal"
+            >
+            Añadir a Favoritos
+          </Button>
+        </Card.Content>
+      </Card>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  content: {
+    marginVertical: 18,
+  },
+  number: {
+    fontSize: 52,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    textAlign: 'left',
+  },
+  containerDesc: {
+    flexDirection: 'col',
+    marginHorizontal: 20,
+    justifyContent: 'center'
+  },
+  titleWeather: {
+    fontSize: 18,
+    marginBottom: 4,
+    textAlign: 'right',
+    fontWeight: 'bold',
+  },
+  titleDescription: {
+    fontSize: 16,
+    marginBottom: 4,
+    textAlign: 'left',
+    color: '#77818F',
+  },
+  mainImage: {
+    width: 55,
+    height: 55,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+});
 
 export default Clima;
