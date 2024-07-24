@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {Text, Card, Button} from 'react-native-paper';
 
 const Clima = ({resultado}) => {
+
+  //State de favoritos
+  const [favorito, setFavorito] = useState(false)
+
   const {name, main, weather, sys} = resultado;
 
   //Si no hay resultado, no mostrar nada
@@ -14,6 +18,12 @@ const Clima = ({resultado}) => {
   //Recorrer el weather
   const descriptions = weather.map(element => element.description);
   const contry = sys.country;
+
+  const favoritos = () => {
+    //Pasando el state
+    setFavorito(true)
+    
+  }
 
   return (
     <View style={styles.content}>
@@ -42,6 +52,7 @@ const Clima = ({resultado}) => {
               />
             )}
             mode="contained-tonal"
+            onPress={() => favoritos()}
             >
             Añadir a Favoritos
           </Button>
