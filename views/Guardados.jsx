@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-paper'
 import ListaFavoritos from '../components/ListaFavoritos'
@@ -9,9 +9,12 @@ const Guardados = ({route}) => {
 
   return (
     <View>
-        <View>
-          <Text style={styles.mainTitle}>Favoritos</Text>
+        <Text style={styles.mainTitle}>Favoritos</Text>
+        <View
+          style={styles.container}
+        >
           <ListaFavoritos
+            style={{flex: 1}}
             datos={datos}
           />
         </View>
@@ -26,6 +29,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'left',
     padding: 10
+  },
+  container: {
+    marginHorizontal: 20
   }
 })
 
