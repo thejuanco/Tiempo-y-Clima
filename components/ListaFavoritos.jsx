@@ -19,7 +19,13 @@ const ListaFavoritos = ({datos}) => {
       <ScrollView>
         {favoritos.length === 0 ? (
           <>
-            <Text>No hay favoritos</Text>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
+              <Image
+                source={require('../src/img/empty.png')}
+                style={styles.image}
+              />
+              <Text style={styles.favorite}>No hay favoritos</Text>
+            </View>
           </>
         ) : (
           favoritos.map((item, index) => (
@@ -112,6 +118,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  image: {
+    width: 250,
+    height: 250,
+    marginBottom: 20,
+    resizeMode: 'contain',
+    alignSelf: 'center'
+  },
+  favorite: {
+    textAlign: 'center',
+    fontSize: 20,
+  }
 });
 
 export default ListaFavoritos;
