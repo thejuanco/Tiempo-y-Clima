@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {Text, Card, Button} from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const Clima = ({resultado}) => {
+
+  //Definiendo la navegacion
+  const navigation = useNavigation();
 
   //State de favoritos
   const [favorito, setFavorito] = useState(false)
@@ -18,11 +22,20 @@ const Clima = ({resultado}) => {
   //Recorrer el weather
   const descriptions = weather.map(element => element.description);
   const contry = sys.country;
+  const temp = parseInt(main.temp - kelvin)
+
+  //Creando un objeto con los parametros del favorito
+  const objTemp = {
+    descriptions,
+    contry,
+    temp,
+    name
+  }
 
   const favoritos = () => {
     //Pasando el state
     setFavorito(true)
-    
+    navigation.navigate('Favoritos', objTemp)
   }
 
   return (
@@ -30,7 +43,7 @@ const Clima = ({resultado}) => {
       <Card>
         <Card.Content>
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-            <Text style={styles.number}>{parseInt(main.temp - kelvin)}° </Text>
+            <Text style={styles.number}>{temp}° </Text>
 
             <View style={styles.containerDesc}>
               <Text style={styles.titleWeather}>{descriptions}</Text>
