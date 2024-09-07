@@ -1,36 +1,10 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Tiempo y Clima (aun en desarrollo)
+Este proyecto es una aplicación movil para conocer el clima, es sencilla e intuitiva.
 
-# Para comenzar
+<img src="https://github.com/user-attachments/assets/8f40ca39-6d81-4e97-b3b3-f3d064d7bad3" alt="UI app clima" width="300"/>
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Caracteristicas
+1. Conocer el clima tiempo real, este proyecto utiliza la API de openweather, por lo que nos permite conocer el clima en ese preciso momento.
+2. Interfaz dinamica e intuitiva, consultas de clima de manera util, y si quieres guardar ese lugar puedes hacerlo de manera sencilla y accesible
+3. No necesita grandes requerimientos, es bastante ligera que no necesita de una gran capacidad del hadware.
 
-## Step 1: Start the Metro Server
-
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Iniciar la aplicación
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-## Step 3: Desarrollo de la aplicación
-Una vez que haz 
