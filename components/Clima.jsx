@@ -10,8 +10,7 @@ const Clima = ({resultado}) => {
 
   //State de favoritos
   const [favorito, setFavorito] = useState(false)
-
-  const {name, main, weather, sys} = resultado; 
+  const {name, main, weather, sys, id} = resultado;
 
   //Si no hay resultado, no mostrar nada
   if (!name) return null;
@@ -29,7 +28,8 @@ const Clima = ({resultado}) => {
     descriptions,
     contry,
     temp,
-    name
+    name,
+    id
   }
 
   const favoritos = () => {
