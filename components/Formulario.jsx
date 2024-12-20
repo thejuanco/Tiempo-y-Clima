@@ -57,7 +57,7 @@ const Formulario = ({busqueda, setBusqueda, setConsultar}) => {
             />
           )}
           >
-          Buscar Clima
+          Buscar clima
         </Button>
       </View>
 

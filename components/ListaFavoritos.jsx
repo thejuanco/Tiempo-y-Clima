@@ -55,7 +55,7 @@ const ListaFavoritos = ({datos}) => {
                   )}
                   style={{textAlign: 'center', width: '100%', marginTop: 10}}
                   mode='contained-tonal'
-                >Remover de Favoritos</Button>
+                >Remover de favoritos</Button>
               </View>
             </>
           ))
