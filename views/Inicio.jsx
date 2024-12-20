@@ -66,6 +66,7 @@ const Inicio = () => {
           resultado={resultado}
         />
         <Formulario
+          consultar={consultar}
           busqueda={busqueda}
           setBusqueda={setBusqueda}
           setConsultar={setConsultar}
