@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {Text, Card, Button} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Clima = ({resultado}) => {
 
@@ -14,6 +16,16 @@ const Clima = ({resultado}) => {
 
   //Si no hay resultado, no mostrar nada
   if (!name) return null;
+
+  //Añade el clima al storage
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem(`clima_${id}`, JSON.stringify(objTemp));
+      console.log('Item saved successfully');
+    } catch (e) {
+      console.error('Error saving item', e);
+    }
+  }
 
   //Grados kelvin
   const kelvin = 273.15;
@@ -35,6 +47,7 @@ const Clima = ({resultado}) => {
   const favoritos = () => {
     //Pasando el state
     setFavorito(true)
+    storeData();
     navigation.navigate('Favoritos', objTemp)
   }
 
