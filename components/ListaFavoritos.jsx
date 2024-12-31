@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, ScrollView, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {Text, Button} from 'react-native-paper';
 
 const ListaFavoritos = ({datos}) => {
   //Almacenando los favoritos en un array
   const [favoritos, setFavorito] = useState([]);
 
-  console.log(datos);
   // Añadir los datos al array de favoritos cuando cambia
   useEffect(() => {
     if (datos) {
@@ -26,11 +25,16 @@ const ListaFavoritos = ({datos}) => {
   }
 
   return (
-    <View>
-      <ScrollView>
+    <>
+      <View>
         {favoritos.length === 0 ? (
           <>
-            <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 80,
+              }}>
               <Image
                 source={require('../src/img/empty.png')}
                 style={styles.image}
@@ -65,15 +69,17 @@ const ListaFavoritos = ({datos}) => {
                     />
                   )}
                   style={{textAlign: 'center', width: '100%', marginTop: 10}}
-                  mode='contained-tonal'
+                  mode="contained-tonal"
                   onPress={() => deleteFavorites(index)}
-                >Remover de favoritos</Button>
+                >
+                  Remover de favoritos
+                </Button>
               </View>
             </>
           ))
         )}
-      </ScrollView>
-    </View>
+      </View>
+    </>
   );
 };
 
