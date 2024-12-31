@@ -30,7 +30,7 @@ const ListaFavoritos = ({datos}) => {
         ) : (
           favoritos.map((item, index) => (
             <>
-              <View style={styles.contenedor}>
+              <View style={styles.contenedor} key={index}>
                 <Text key={index} style={styles.number}>
                   {item.temp}°
                 </Text>
