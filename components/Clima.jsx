@@ -21,7 +21,6 @@ const Clima = ({resultado}) => {
   const storeData = async () => {
     try {
       await AsyncStorage.setItem(`clima_${id}`, JSON.stringify(objTemp));
-      console.log('Item saved successfully');
     } catch (e) {
       console.error('Error saving item', e);
     }
@@ -48,7 +47,7 @@ const Clima = ({resultado}) => {
     //Pasando el state
     setFavorito(true)
     storeData();
-    navigation.navigate('Favoritos', objTemp)
+    navigation.navigate('Favoritos', {datos: objTemp})
   }
 
   return (

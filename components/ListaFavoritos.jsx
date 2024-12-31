@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {Text, Button} from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ListaFavoritos = ({datos}) => {
   //Almacenando los favoritos en un array
   const [favoritos, setFavorito] = useState([]);
+  const [dataStorage, setDataStorage] = useState('')
 
   // Añadir los datos al array de favoritos cuando cambia
   useEffect(() => {
@@ -19,9 +21,31 @@ const ListaFavoritos = ({datos}) => {
     }
   }, [datos]);
 
-  const deleteFavorites = (index) => {
-    //Usamos el set para actualizar el estado del array favoritos
-    setFavorito(prevFavoritos => prevFavoritos.filter((_, i) => i !== index));
+  //Obtener los datos del storage
+  useEffect(() => {
+    const loadFavorites = async () => {
+      try {
+        const keys = await AsyncStorage.getAllKeys(); // Obtiene todas las claves del almacenamiento
+        const storedItems = await AsyncStorage.multiGet(keys); // Obtiene los valores correspondientes
+        const parsedItems = storedItems.map(item => JSON.parse(item[1])); // Convierte los datos a JSON
+        setFavorito(parsedItems);
+      } catch (error) {
+        console.error('Error al cargar los favoritos', error);
+      }
+    };
+  
+    loadFavorites(); // Llamada inicial para cargar los datos almacenados
+  }, []);
+
+
+  const deleteFavorites = async (index) => {
+    try {
+      const favoriteToDelete = favoritos[index];
+      await AsyncStorage.removeItem(`clima_${favoriteToDelete.id}`);
+      setFavorito(preveFavoritos => preveFavoritos.filter((_, i) => i !== index))
+    } catch (error) {
+      console.error('Error al eliminar los favoritos', error);
+    }
   }
 
   return (
@@ -45,8 +69,8 @@ const ListaFavoritos = ({datos}) => {
         ) : (
           favoritos.map((item, index) => (
             <>
-              <View style={styles.contenedor} key={index}>
-                <Text key={index} style={styles.number}>
+              <View style={styles.contenedor} key={item.id}>
+                <Text style={styles.number}>
                   {item.temp}°
                 </Text>
 
@@ -55,6 +79,7 @@ const ListaFavoritos = ({datos}) => {
                   <Text style={styles.titleDescription}>
                     {item.name}, {item.contry}
                   </Text>
+                  
                 </View>
 
                 <Image
