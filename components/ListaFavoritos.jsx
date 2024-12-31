@@ -10,9 +10,20 @@ const ListaFavoritos = ({datos}) => {
   // Añadir los datos al array de favoritos cuando cambia
   useEffect(() => {
     if (datos) {
-      setFavorito(prevFavoritos => [...prevFavoritos, datos]);
+      setFavorito(prevFavoritos => {
+        const exists = prevFavoritos.some(item => item.name === datos.name && item.temp === datos.temp)
+        if(!exists){
+          return [...prevFavoritos, datos];
+        }
+        return prevFavoritos; //Si ya existen, no lo agrega
+      });
     }
   }, [datos]);
+
+  const deleteFavorites = (index) => {
+    //Usamos el set para actualizar el estado del array favoritos
+    setFavorito(prevFavoritos => prevFavoritos.filter((_, i) => i !== index));
+  }
 
   return (
     <View>
@@ -55,6 +66,7 @@ const ListaFavoritos = ({datos}) => {
                   )}
                   style={{textAlign: 'center', width: '100%', marginTop: 10}}
                   mode='contained-tonal'
+                  onPress={() => deleteFavorites(index)}
                 >Remover de favoritos</Button>
               </View>
             </>
