@@ -21,9 +21,10 @@ const App = () => {
           screenOptions={() => ({
             tabBarStyle: styles.navigation,
             tabBarItemStyle: styles.itemStyle,
-            tabBarActiveBackgroundColor: '#ca8a04',
-            tabBarActiveTintColor: '#ffff',
-            tabBarInactiveTintColor: '#0007'
+            tabBarActiveBackgroundColor: '#d0d0edff',
+            tabBarActiveTintColor: '#000000ff',
+            tabBarInactiveTintColor: '#0007',
+            
           })}
         >
           <Tab.Screen
@@ -71,22 +72,22 @@ const App = () => {
 
 const styles = StyleSheet.create({
   navigation: {
-    height: 80,
-    backgroundColor: '#fefce8',
+    height: 75,
+    backgroundColor: '#E6E6FA',
     position: 'absolute',
     bottom: 10,
     left: 20,
     right: 20,
-    borderRadius: 40,
+    borderRadius: 45,
     borderTopWidth: 0,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 5},
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    elevation: 5
+    elevation: 5,
   },
   itemStyle: {
-    paddingVertical: 10,
+    paddingVertical: 9,
     margin: 10,
     borderRadius: 50,
 
