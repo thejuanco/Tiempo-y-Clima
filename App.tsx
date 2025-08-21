@@ -24,7 +24,8 @@ const App = () => {
             tabBarActiveBackgroundColor: '#d0d0edff',
             tabBarActiveTintColor: '#000000ff',
             tabBarInactiveTintColor: '#0007',
-            
+            //tabBarShowLabel: false -- Oculta las letras del nav
+            headerShown: false
           })}
         >
           <Tab.Screen
@@ -58,7 +59,7 @@ const App = () => {
                       require('./src/img/guardar.png')
                   }
                   style={{
-                    height: 22, width: 22
+                    height: 22, width: 22,
                   }}
                 />
               )
