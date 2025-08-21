@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native'
+import { Image, View, StyleSheet } from 'react-native'
+//Inactiva por el momento
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-native-paper';
 
@@ -8,24 +10,32 @@ import Guardados from './views/Guardados';
 import Inicio from './views/Inicio';
 
 //Defieniendo la navegacion
-const Tab = createMaterialBottomTabNavigator()
+const Tab = createBottomTabNavigator()
 
 const App = () => {
 
   return (
     <Provider>
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={() => ({
+            tabBarStyle: styles.navigation,
+            tabBarItemStyle: styles.itemStyle,
+            tabBarActiveBackgroundColor: '#ca8a04',
+            tabBarActiveTintColor: '#ffff',
+            tabBarInactiveTintColor: '#0007'
+          })}
+        >
           <Tab.Screen
             name='Inicio'
             component={Inicio}
             options={{
-              tabBarIcon: ({focused}) => (
+              tabBarIcon: ({ focused }) => (
                 <Image
                   source={
-                    focused ? 
+                    focused ?
                       require('./src/img/homeNegro.png') :
-                      require('./src/img/home.png') 
+                      require('./src/img/home.png')
                   }
                   style={{
                     height: 22, width: 22
@@ -39,12 +49,12 @@ const App = () => {
             name='Favoritos'
             component={Guardados}
             options={{
-              tabBarIcon: ({focused}) => (
+              tabBarIcon: ({ focused }) => (
                 <Image
                   source={
-                    focused ? 
+                    focused ?
                       require('./src/img/guardarNegro.png') :
-                      require('./src/img/guardar.png') 
+                      require('./src/img/guardar.png')
                   }
                   style={{
                     height: 22, width: 22
@@ -58,5 +68,29 @@ const App = () => {
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  navigation: {
+    height: 80,
+    backgroundColor: '#fefce8',
+    position: 'absolute',
+    bottom: 10,
+    left: 20,
+    right: 20,
+    borderRadius: 40,
+    borderTopWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5
+  },
+  itemStyle: {
+    paddingVertical: 10,
+    margin: 10,
+    borderRadius: 50,
+
+  }
+})
 
 export default App;
